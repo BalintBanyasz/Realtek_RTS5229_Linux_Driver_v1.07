@@ -263,7 +263,7 @@ static struct scsi_host_template rtsx_host_template = {
 	
 	.name =				CR_DRIVER_NAME,
 	.proc_name =			CR_DRIVER_NAME,
-	.proc_info =			proc_info,
+//	.proc_info =			proc_info,
 	.info =				host_info,
 
 	
@@ -911,7 +911,7 @@ static void rtsx_init_options(struct rtsx_chip *chip)
 	chip->support_mmc = 1;
 }
 
-static int __devinit rtsx_probe(struct pci_dev *pci, const struct pci_device_id *pci_id)
+static int rtsx_probe(struct pci_dev *pci, const struct pci_device_id *pci_id)
 {
 	struct Scsi_Host *host;
 	struct rtsx_dev *dev;
@@ -1066,7 +1066,7 @@ errout:
 }
 
 
-static void __devexit rtsx_remove(struct pci_dev *pci)
+static void rtsx_remove(struct pci_dev *pci)
 {
 	struct rtsx_dev *dev = (struct rtsx_dev *)pci_get_drvdata(pci);
 
@@ -1092,7 +1092,7 @@ static struct pci_driver driver = {
 	.name = CR_DRIVER_NAME,
 	.id_table = rts5229_ids,
 	.probe = rtsx_probe,
-	.remove = __devexit_p(rtsx_remove),
+	.remove = (rtsx_remove),
 #ifdef CONFIG_PM
 	.suspend = rtsx_suspend,
 	.resume = rtsx_resume,
